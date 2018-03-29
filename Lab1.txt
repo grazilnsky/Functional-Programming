@@ -1,0 +1,42 @@
+(define powS(lambda (x y)
+  (if(= y 0)
+  1          
+  (* x (powS x (- y 1)))
+)))
+
+(define powT(lambda (x y acc)
+  (if(= y 0)
+  acc
+  (powT x (- y 1) (* acc x))
+)))
+
+(define fiboT(lambda (n f1 f2)
+  (if(= n 2)
+  f2
+  (fiboT (- n 1) f2 (+ f2 f1))
+)))
+
+(define fiboS (lambda (n)
+  (if (<= n 2)
+  1
+  (+ (fiboS (- n 1)) (fiboS (- n 2)))
+)))
+
+(define prodS(lambda (lst)
+  (if (null? lst)
+   1
+  (* (car lst) (prodS (cdr lst)))
+)))
+
+(define prodT(lambda (lst acc)
+  (if (null? lst)
+  acc
+  (prodT (cdr lst) (* acc (car lst)))
+)))
+
+(define search(lambda (n lst)
+   (cond
+     ((null? lst) #f)
+     ((eq? n (car lst)) #t)
+     (else (search n (cdr lst)))
+)))

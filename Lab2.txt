@@ -1,0 +1,37 @@
+(define f1 (lambda (n acc)
+  (if (< n 2)
+      #f
+      (if (= n 2)
+          #t
+          (if (= (modulo n acc) 0)
+              #f
+              (if(>= acc (quotient n 2))
+                 #t
+                 (f1 n (+ acc 1)))
+)))))
+
+(define f2 (lambda (lis n1 n2)
+  (if(> n1 n2) 
+     lis          
+  (if (f1 n1 2)  
+     (f2 (cons n1 lis) (+ n1 1) n2)
+     (f2 lis (+ n1 1) n2)
+))))
+
+(define sumDigits (lambda (n acc)
+    (if (= n 0) acc
+    (sumDigits (quotient n 10) (+ acc (modulo n 10)))      
+)))
+
+(define f3 (lambda (n k)
+  (if (= k (sumDigits n 0)) #t
+     #f   
+)))
+
+(define f4 (lambda (n1 n2 k lis)
+  (if (> n1 n2)
+      lis
+  (if (f3 n1 k)
+      (f4 (+ n1 1) n2 k (cons n1 lis))
+      (f4 (+ n1 1) n2 k lis)
+))))
