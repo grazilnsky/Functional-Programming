@@ -1,0 +1,67 @@
+(define f1(lambda(xx yy)
+     (letrec ((pow(lambda (x y acc)
+            (if (eqv? x 0)
+                acc
+                (if(<= y 0)
+                    acc
+                    (pow x (- y 1) (* acc x))
+                    )))))
+            (pow xx yy 1)
+            )))
+
+
+(define f1PRIME(lambda(xx yy)
+                 (let powPRIME((x xx)(y yy)(acc 1))
+                   (if (eqv? x 0)
+                       acc
+                       (if(<= y 0)
+                       acc
+                       (powPRIME x (- y 1) (* acc x)))))))
+
+
+(define f2(lambda(myLst1 myLst2)
+            (letrec ((union(lambda (lst1 lst2 acc)
+                    (if (null? lst1)
+                        acc
+                        (if (member (car lst1) lst2)
+                            (union (cdr lst1) lst2 acc)
+                            (union (cdr lst1) lst2 (append acc (list (car lst1))))
+                            )))))
+              (union myLst1 myLst2 myLst2)
+              )))
+            
+      
+      
+(define f2PRIME(lambda(myLst1 myLst2)
+                 (let unionPRIME((lst1 myLst1) (lst2 myLst2) (acc myLst2))
+                        (if (null? lst1)
+                            acc
+                            (if (member(car lst1) lst2)
+                                (unionPRIME (cdr lst1) lst2 acc)
+                                (unionPRIME (cdr lst1) lst2 (append acc (list (car lst1)))
+                                ))))
+                 ))
+
+(define f3(lambda(myLst1 myLst2)
+   (let sum((lst1 myLst1) (lst2 myLst2) (acc '()))
+     (if (null? lst1)
+      (reverse acc)
+      (sum (cdr lst1) (cdr lst2) (append (list (+ (car lst1) (car lst2))) acc))))))
+
+
+
+(define f4PRIME(lambda(lst1 pos counter acc)
+                 (if (null? lst1)
+                     acc
+                 (if (eqv? counter pos)
+                     (f4PRIME (cdr lst1) pos (+ counter 1) acc)
+                     (f4PRIME (cdr lst1) pos (+ counter 1) (append acc (list (car lst1))))))))
+
+
+(define f4(lambda(myList counter acc)
+            (if (null? myList)
+                acc
+          (if (= counter (length myList))
+              acc
+              (f4 myList (+ counter 1) (cons  (f4PRIME myList counter 0 '()) acc))))))
+            
