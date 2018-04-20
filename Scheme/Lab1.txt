@@ -1,3 +1,11 @@
+powS - x^y using stack recursion
+powT - x^y using tail recursion
+fiboS - n-th element of Fibonacci sequence using stack recursion
+fiboT - n-th element of Fibonacci sequence using tail recursion
+prodS - product of the elements of a list using stack recursion
+prodT - product of the elements of a list using stack recursion
+search - return true if n is in the list, false otherwise
+
 (define powS(lambda (x y)
   (if(= y 0)
   1          
