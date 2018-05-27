@@ -1,0 +1,17 @@
+f2::[Integer]->Integer->Integer
+f2 [] acc = acc
+f2 (x:xs) acc = f2 xs (acc + x)
+
+len::[Integer]->Integer
+len [] = 0
+len (x:xs) = 1 + len xs
+
+diffelements::[Integer]->[Integer]->[Integer]
+diffelements [] acc = acc
+diffelements (x:xs) acc = if elem x acc then diffelements xs acc
+                          else diffelements xs (x:acc)
+                          
+f3::[[Integer]]->[[Integer]]->[[Integer]]
+f3 [] acc = reverse acc
+f3 (x:xs) acc = if len (diffelements x []) > 2 then f3 xs (x:acc)
+                else f3 xs acc
