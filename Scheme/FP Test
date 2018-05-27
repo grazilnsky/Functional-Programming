@@ -1,0 +1,21 @@
+(define f1 (lambda (lis)
+                (cond
+                  ((eq? lis '()) 1)
+                  (else (* (car lis) (f1 (cdr lis)))))))
+
+(define len(lambda (lis)
+             (cond
+               ((eq? lis '()) 0)
+               (else (+ 1 (len (cdr lis)))))))
+
+(define diffelements(lambda (lis acc)
+                      (cond
+                        ((eq? lis '()) acc)
+                        ((eq?(member (car lis) acc) #f) (diffelements (cdr lis) (append acc (list (car lis)))))
+                        (else (diffelements (cdr lis) acc)))))
+
+(define f3 (lambda (matrix acc)
+             (cond
+               ((eq? matrix '()) (reverse acc))
+               ((> (len (diffelements (car matrix) '())) 2) (f3 (cdr matrix) (cons (car matrix) acc )))
+               (else (f3 (cdr matrix) acc)))))
